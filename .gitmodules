@@ -6,6 +6,7 @@
 	url = https://github.com/ActivityWatch/aw-client.git
 [submodule "aw-server"]
 	path = aw-server
+	branch = scheduler
 	url = https://github.com/sixtop/aw-server.git
 [submodule "aw-watcher-afk"]
 	path = aw-watcher-afk

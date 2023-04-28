@@ -2,11 +2,11 @@
 
 FROM ubuntu:latest AS builder-base
 
-MAINTAINER Victor Palacios victor@sixtop.net
+LABEL org.opencontainers.image.authors="victor@sixtop.net"
 
 # Install dependencies
 RUN apt update && apt upgrade -y
-RUN apt install -y bash git build-essential python3 python3-dev python3-venv curl nodejs npm
+RUN apt install -y bash git build-essential python3 python3-dev python3-venv curl nodejs npm vim
 RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN curl https://sh.rustup.rs | sh -s -- -y
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3 -
@@ -22,9 +22,9 @@ RUN git --version && make --version && python --version && pip --version && node
 
 # Get sources
 WORKDIR /user/src
-RUN git clone --recurse-submodules -j8 https://github.com/sixtop/activitywatch.git
+RUN git clone --recurse-submodules -j8 -b dev https://github.com/sixtop/activitywatch.git
 
-WORKDIR activitywatch
+WORKDIR /user/src/activitywatch
 RUN python -m venv venv
 ENV VIRTUAL_ENV="/user/src/activitywatch/venv"
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
